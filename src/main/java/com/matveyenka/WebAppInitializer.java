@@ -3,6 +3,8 @@ package com.matveyenka;
 import com.matveyenka.config.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.ServletRegistration;
+
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     public static final String SERVLET_MAPPINGS = "/";
@@ -20,5 +22,10 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     @Override
     protected String[] getServletMappings() {
         return new String[] {SERVLET_MAPPINGS};
+    }
+
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
     }
 }
